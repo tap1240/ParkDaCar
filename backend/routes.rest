@@ -1,0 +1,21 @@
+GET http://localhost:8080/
+
+###
+
+# vehicle home
+GET http://localhost:8080/vehicle/
+
+###
+
+# Get a specific vehicle
+GET http://localhost:8080/vehicle/5UXWX7C5*BA
+
+###
+
+# add a vehicle
+POST http://localhost:8080/vehicle/
+Content-Type: application/json
+
+{
+    "vin": "5UXWX7C5*BA"
+}
