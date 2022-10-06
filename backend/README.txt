@@ -1,3 +1,7 @@
+TO RUN -------------------------------------------
+
+- .env file is required to run the application. Please see the email for the .env file.
+
 app.js -------------------------------------------
     
     - sets up the express server on port 8080
