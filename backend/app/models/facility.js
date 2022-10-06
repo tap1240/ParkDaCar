@@ -57,4 +57,17 @@ Facility.getAllFacilities = async () => {
   return facilities;
 };
 
+Facility.updateFacility = async (name, address, parking) => {
+  // make sure facility exists
+  const facility = await Facility.findOne({ name: name });
+  if (!facility) {
+    throw new Error("Facility does not exist");
+  }
+
+  // update facility parking
+  facility.parking = parking;
+  await facility.save();
+  return facility;
+};
+
 module.exports = Facility;

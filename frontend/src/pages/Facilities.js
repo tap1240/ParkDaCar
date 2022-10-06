@@ -1,49 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../App.css";
 import "../styles/Facilities.css";
+import { useFacilities } from "../contexts/Facilities";
 
 export default function Facilities() {
-  const [facilities, setFacilities] = useState([]);
-  const [selectedName, setSelectedFacility] = useState(null);
-  const [facilityData, setFacilityData] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/facility")
-      .then((response) => response.json())
-      .then((data) => {
-        setFacilities(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    const data = facilities.find((facility) => {
-      return facility.name === selectedName;
-    });
-    setFacilityData(data);
-  }, [selectedName, facilities]);
-
-  // render dropdown to select facility
-  function renderFacilityDropdown() {
-    return (
-      <select
-        className="facility-dropdown"
-        onChange={(e) => {
-          setSelectedFacility(e.target.value);
-        }}
-      >
-        <option key={"select"} value={null}>
-          Select Facility
-        </option>
-        {facilities.map((facility) => {
-          return (
-            <option key={facility.name} value={facility.name}>
-              {facility.name}
-            </option>
-          );
-        })}
-      </select>
-    );
-  }
+  const { facilityData, renderFacilityDropdown } = useFacilities();
 
   //   render facility details
   function renderFacilityDetails() {

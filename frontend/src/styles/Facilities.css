@@ -36,6 +36,12 @@
     padding: 5px 10px;
     background-color: #06800c;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.available:hover {
+    background-color: #0c8c0c;
+    color: #fff;
 }
 
 .occupied {
@@ -49,5 +55,11 @@
     padding: 5px 10px;
     background-color: #ff0000;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.occupied:hover {
+    background-color: #ff0000;
+    color: #fff;
 }
 

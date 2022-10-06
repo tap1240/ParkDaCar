@@ -13,4 +13,7 @@ router.get("/:name", facilityController.getFacility);
 // add facility to database
 router.post("/", facilityController.addFacility);
 
+// update facility in database
+router.put("/:name", facilityController.updateFacility);
+
 module.exports = router;

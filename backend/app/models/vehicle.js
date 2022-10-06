@@ -45,7 +45,7 @@ returns:
   (object) vehicle data
   { vin: (string), year: (string), make: (string), model: (string), trim: (string) }
 */
-async function getVehicleByVin(vin) {
+Vehicle.getVehicleByVin = async (vin) => {
   const response = await fetch(
     `${url}vehicles/decodevinvalues/${vin}?format=json`
   );
@@ -64,6 +64,6 @@ async function getVehicleByVin(vin) {
   };
 
   return vehicle;
-}
+};
 
 module.exports = Vehicle;

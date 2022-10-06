@@ -41,3 +41,15 @@ GET http://localhost:8080/facility/Test%20Facility
 # get all facilities
 GET http://localhost:8080/facility
 
+
+###
+# update a facility
+PUT http://localhost:8080/facility/Test%20Facility
+Content-Type: application/json
+
+{
+    "name": "Test Facility",
+    "address": "1234 Test St",
+    "parking": [{"id" : 1, "occupied": true}, {"id" : 2, "occupied": false}]
+}
+

@@ -26,3 +26,16 @@ exports.addFacility = async (req, res) => {
     res.status(400).send({ message: err.message });
   }
 };
+
+exports.updateFacility = async (req, res) => {
+  try {
+    const result = await Facility.updateFacility(
+      req.body.name,
+      req.body.address,
+      req.body.parking
+    );
+    res.send(result);
+  } catch (err) {
+    res.status(400).send({ message: err.message });
+  }
+};
