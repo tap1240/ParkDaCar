@@ -1,4 +1,2 @@
 node_modules
-
-# should be ignored in production
-# .env
+.env
