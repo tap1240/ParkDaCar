@@ -6,10 +6,10 @@ import SideNav from "./components/SideNav";
 
 const App = () => {
   return (
-    <>
+    <div className="App">
       <SideNav />
-      <Navigator />;
-    </>
+      <Navigator />
+    </div>
   );
 };
 

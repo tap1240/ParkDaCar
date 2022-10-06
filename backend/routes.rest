@@ -26,9 +26,9 @@ POST http://localhost:8080/facility/
 Content-Type: application/json
 
 {
-    "name": "Test Facility",
-    "address": "123 Main St",
-    "parking": 2
+    "name": "BOOM",
+    "address": "POW",
+    "parking": 15
 }
 
 

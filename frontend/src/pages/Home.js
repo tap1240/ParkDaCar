@@ -13,7 +13,7 @@ export default function Home() {
   }
 
   return (
-    <div className="App-header">
+    <div className="main-container">
       <h1>Park Da Car</h1>
       {renderButtons()}
     </div>

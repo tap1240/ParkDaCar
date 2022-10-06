@@ -38,11 +38,9 @@ Facility.addFacility = async (name, address, numParkingSpots) => {
   }
 
   // create object to store parking spots, each parking spot is an object with fields: id, occupied
-  const parking = {};
+  const parking = [];
   for (let i = 1; i <= numParkingSpots; i++) {
-    parking[i] = {
-      occupied: false,
-    };
+    parking.push({ id: i, occupied: false });
   }
 
   const facility = new Facility({
