@@ -28,11 +28,15 @@ const vehicleSchema = new mongoose.Schema({
   },
 });
 
-// add static method to vehicle schema
-vehicleSchema.statics.getVehicleByVin = getVehicleByVin;
-
 // create vehicle model
 const Vehicle = mongoose.model("Vehicle", vehicleSchema);
+
+Vehicle.addVehicle = async (vin) => {
+  const vehicleData = await getVehicleByVin(vin);
+  const vehicle = new Vehicle(vehicleData);
+  const result = await vehicle.save();
+  return result;
+};
 
 /* 
 params:
@@ -62,4 +66,4 @@ async function getVehicleByVin(vin) {
   return vehicle;
 }
 
-(module.exports = Vehicle), { getVehicleByVin };
+module.exports = Vehicle;

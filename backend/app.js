@@ -14,10 +14,12 @@ app.use(cors());
 // import routes
 const adminRoute = require("./app/routes/admin");
 const vehicleRoutes = require("./app/routes/vehicle");
+const facilityRoutes = require("./app/routes/facility");
 
 // use routes
 app.use("/", adminRoute);
 app.use("/vehicle", vehicleRoutes);
+app.use("/facility", facilityRoutes);
 
 // listen on port 8080
 const port = 8080;

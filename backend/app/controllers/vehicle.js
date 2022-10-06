@@ -18,8 +18,10 @@ exports.addVehicle = async (req, res) => {
     return;
   }
 
-  const vehicleData = await Vehicle.getVehicleByVin(vin);
-  const vehicle = new Vehicle(vehicleData);
-  const result = await vehicle.save();
-  res.send(result);
+  try {
+    const result = await Vehicle.addVehicle(vin);
+    res.send(result);
+  } catch (err) {
+    res.status(400).send(err);
+  }
 };

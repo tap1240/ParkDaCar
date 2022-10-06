@@ -1,0 +1,21 @@
+.sidenav {
+  height: 100%;
+  width: 15%;
+  background-color: rgb(190, 190, 190);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  }
+
+.navbutton {
+  padding: 8px 8px 8px 32px;
+  font-size: 25px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  padding-bottom: 15px;
+  }

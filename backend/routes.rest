@@ -1,17 +1,16 @@
 GET http://localhost:8080/
 
 ###
-
 # vehicle home
 GET http://localhost:8080/vehicle/
 
-###
 
+###
 # Get a specific vehicle
 GET http://localhost:8080/vehicle/5UXWX7C5*BA
 
-###
 
+###
 # add a vehicle
 POST http://localhost:8080/vehicle/
 Content-Type: application/json
@@ -19,3 +18,26 @@ Content-Type: application/json
 {
     "vin": "5UXWX7C5*BA"
 }
+
+
+###
+# add a facility
+POST http://localhost:8080/facility/
+Content-Type: application/json
+
+{
+    "name": "Test Facility",
+    "address": "123 Main St",
+    "parking": 2
+}
+
+
+###
+# get a facility by name
+GET http://localhost:8080/facility/Test%20Facility
+
+
+###
+# get all facilities
+GET http://localhost:8080/facility
+

@@ -1,16 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-
-import Home from "./pages/Home";
+import "./styles/SideNav.css";
+import Navigator from "./navigation/Navigator";
+import SideNav from "./components/SideNav";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-      </Routes>
-    </Router>
+    <>
+      <SideNav />
+      <Navigator />;
+    </>
   );
 };
 
