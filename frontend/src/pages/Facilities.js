@@ -40,6 +40,7 @@ export default function Facilities() {
               <button
                 key={spot.id}
                 className={spot.occupied ? "occupied" : "available"}
+                onClick={() => parkingSpotClick(spot)}
               >
                 {spot.id}
               </button>
@@ -50,9 +51,14 @@ export default function Facilities() {
     });
   }
 
+  function parkingSpotClick(spot) {
+    alert(JSON.stringify(spot, null, 2));
+    console.log(spot);
+  }
+
   return (
     <div className="main-container">
-      <h1>Facilities</h1>
+      <h3>Facilities</h3>
       {renderFacilityDropdown()}
       {renderFacilityDetails()}
     </div>

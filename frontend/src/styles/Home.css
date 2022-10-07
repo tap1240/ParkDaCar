@@ -1,6 +1,6 @@
 .center {
-    text-align: center;
-  }
+  text-align: center;
+}
 
 .button-container {
   display: flex;
@@ -21,4 +21,3 @@
   cursor: pointer;
   border-radius: 10px;
 }
-

@@ -31,11 +31,11 @@ export default function CheckIn({ checkInVisible, setCheckInVisible }) {
     const attendant = document.getElementById("attendant").value;
 
     // if not time, set to current time
-    const time = document.getElementById("check-in-time").value;
+    let time = document.getElementById("check-in-time").value;
     if (time === "") {
       const now = new Date();
-      const timeString = now.toISOString().slice(0, 19).replace("T", " ");
-      document.getElementById("check-in-time").value = timeString;
+      time = now.toISOString().slice(0, 19).replace("T", " ");
+      document.getElementById("check-in-time").value = time;
     }
 
     const owner = document.getElementById("owner").value;
@@ -48,13 +48,16 @@ export default function CheckIn({ checkInVisible, setCheckInVisible }) {
       return;
     }
 
+    // create owner object
+    const ownerInfo = { owner, address, phone };
+
     // get first empty spot in facilityData.parking
     let parkingSpot = null;
     for (const index in facilityData.parking) {
       if (facilityData.parking[index].occupied === false) {
         facilityData.parking[index].occupied = true;
-        facilityData.parking[index].vehicle = vin;
-        facilityData.parking[index].owner = owner;
+        facilityData.parking[index].vehicle = vehicleInfo;
+        facilityData.parking[index].owner = ownerInfo;
         facilityData.parking[index].time = time;
         facilityData.parking[index].attendant = attendant;
 
@@ -87,8 +90,7 @@ export default function CheckIn({ checkInVisible, setCheckInVisible }) {
       }
     }
 
-    // consolidate data into one object
-    const ownerInfo = { owner, address, phone };
+    // do I use these to create a check-in object? or nah?
 
     const facilityInfo = {
       facility: facilityData.name,

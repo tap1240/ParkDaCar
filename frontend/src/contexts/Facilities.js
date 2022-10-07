@@ -13,13 +13,21 @@ export function FacilitiesProvider({ children }) {
 
   // fetch facilities from backend
   useEffect(() => {
-    fetch("http://localhost:8080/facility")
-      .then((response) => response.json())
-      .then((data) => {
-        setFacilities(data);
+    async function fetchFacilities() {
+      const res = await fetch("http://localhost:8080/facility");
+      const data = await res.json();
+      setFacilities(data);
+
+      // set default facility to first facility in list
+      // if found in local storage, set to that
+      if (localStorage.getItem("selectedName")) {
+        setSelectedName(localStorage.getItem("selectedName"));
+      } else {
         setSelectedName(data[0].name);
-        setFacilityData(data[0]);
-      });
+      }
+    }
+
+    fetchFacilities();
   }, []);
 
   // changes the selected facility from the dropdown
@@ -32,25 +40,33 @@ export function FacilitiesProvider({ children }) {
 
   // render dropdown to select facility
   function renderFacilityDropdown() {
+    if (!selectedName) {
+      return null;
+    }
+
+    const options = facilities.map((facility) => {
+      return (
+        <option key={facility.name} value={facility.name}>
+          {facility.name}
+        </option>
+      );
+    });
+
     return (
       <select
-        className="facility-dropdown"
-        onChange={(e) => {
-          setSelectedName(e.target.value);
-        }}
+        id="facility-dropdown"
+        value={selectedName}
+        onChange={(e) => dropdownSelect(e)}
       >
-        {/* <option key={"select"} value={null}>
-          Select Facility
-        </option> */}
-        {facilities.map((facility) => {
-          return (
-            <option key={facility.name} value={facility.name}>
-              {facility.name}
-            </option>
-          );
-        })}
+        {options}
       </select>
     );
+  }
+
+  function dropdownSelect(e) {
+    setSelectedName(e.target.value);
+    // set local storage
+    localStorage.setItem("selectedName", e.target.value);
   }
 
   const value = {

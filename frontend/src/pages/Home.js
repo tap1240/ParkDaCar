@@ -13,12 +13,10 @@ export default function Home() {
       return;
     }
     setCheckInVisible(true);
-    console.log("check in");
   }
 
   function handleCheckOut() {
     facilityCheck();
-    console.log("check out");
   }
 
   function facilityCheck() {
