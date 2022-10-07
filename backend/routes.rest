@@ -53,3 +53,24 @@ Content-Type: application/json
     "parking": [{"id" : 1, "occupied": true}, {"id" : 2, "occupied": false}]
 }
 
+###
+# add history
+POST http://localhost:8080/history/
+Content-Type: application/json
+
+{
+    "vin": "test.vin",
+    "year": "test.year",
+    "make": "test.make",
+    "model": "test.model",
+    "trim": "test.trim",
+    "facilityName": "test.facilityName",
+    "facilityAddress": "test.facilityAddress",
+    "parkingSpot": "test.parkingSpot",
+    "ownerName": "test.ownerName",
+    "ownerAddress": "test.ownerAddress",
+    "ownerPhone": "test.ownerPhone",
+    "checkInTime": "test.checkInTime",
+    "checkOutTime": "test.checkOutTime"
+}
+

@@ -16,6 +16,10 @@ export default function SideNav() {
       name: "Valeted\nVehicles",
       path: "/vehicles",
     },
+    {
+      name: "Valet\nHistory",
+      path: "/history",
+    },
   ];
 
   function renderNavItems() {
