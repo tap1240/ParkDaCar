@@ -60,14 +60,8 @@ const historySchema = new mongoose.Schema({
 // create a model for the history
 const History = mongoose.model("History", historySchema);
 
-// get history by _id
-History.getHistoryById = async (_id) => {
-  const history = await History.findById(_id);
-  return history;
-};
-
 // get all history
-History.getAllHistory = async () => {
+History.getAll = async () => {
   const history = await History.find();
   return history;
 };
@@ -77,11 +71,6 @@ History.addHistory = async (history) => {
   const newHistory = new History(history);
   const result = await newHistory.save();
   return result;
-};
-
-History.print = async () => {
-  console.log("Hello World");
-  return "Hello World";
 };
 
 module.exports = History;

@@ -1,29 +1,13 @@
 const History = require("../models/history");
 
-exports.getAll = (req, res) => {
-  History.getAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving history.",
-      });
-    else res.send(data);
-  });
-};
-
-exports.getHistoryById = (req, res) => {
-  History.getHistoryById(req.params.historyId, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found History with id ${req.params.historyId}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Error retrieving History with id " + req.params.historyId,
-        });
-      }
-    } else res.send(data);
-  });
+exports.getAll = async (req, res) => {
+  try {
+    const result = await History.getAll();
+    console.log(result);
+    res.send(result);
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
 };
 
 exports.addHistory = async (req, res) => {

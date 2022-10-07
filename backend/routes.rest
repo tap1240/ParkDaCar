@@ -59,18 +59,22 @@ POST http://localhost:8080/history/
 Content-Type: application/json
 
 {
-    "vin": "test.vin",
-    "year": "test.year",
-    "make": "test.make",
-    "model": "test.model",
-    "trim": "test.trim",
-    "facilityName": "test.facilityName",
-    "facilityAddress": "test.facilityAddress",
-    "parkingSpot": "test.parkingSpot",
-    "ownerName": "test.ownerName",
-    "ownerAddress": "test.ownerAddress",
-    "ownerPhone": "test.ownerPhone",
-    "checkInTime": "test.checkInTime",
-    "checkOutTime": "test.checkOutTime"
+    "vin": "BOOM.vin",
+    "year": "BOOM.year",
+    "make": "BOOM.make",
+    "model": "BOOM.model",
+    "trim": "BOOM.trim",
+    "facilityName": "BOOM.facilityName",
+    "facilityAddress": "BOOM.facilityAddress",
+    "parkingSpot": "BOOM.parkingSpot",
+    "ownerName": "BOOM.ownerName",
+    "ownerAddress": "BOOM.ownerAddress",
+    "ownerPhone": "BOOM.ownerPhone",
+    "checkInTime": "BOOM.checkInTime",
+    "checkOutTime": "BOOM.checkOutTime"
 }
+
+###
+# get history
+GET http://localhost:8080/history
 
