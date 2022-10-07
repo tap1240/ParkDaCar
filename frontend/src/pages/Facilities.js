@@ -4,19 +4,18 @@ import "../styles/Facilities.css";
 import { useFacilities } from "../contexts/Facilities";
 
 export default function Facilities() {
-  const { facilityData, renderFacilityDropdown } = useFacilities();
+  const { currentFacility, renderFacilityDropdown } = useFacilities();
 
   //   render facility details
   function renderFacilityDetails() {
-    if (!facilityData) {
+    if (!currentFacility) {
       return null;
     }
 
     // calculate total number of parking spots
     let totalParkingSpots = 0;
     let occupiedParkingSpots = 0;
-    facilityData.parking.forEach((spot) => {
-      console.log(spot);
+    currentFacility.parking.forEach((spot) => {
       totalParkingSpots += 1;
       if (spot.occupied) {
         occupiedParkingSpots += 1;
@@ -26,7 +25,6 @@ export default function Facilities() {
     return (
       <div className="facility-details">
         <div className="facility-info1">
-          <p>Address: {facilityData.address}</p>
           <p>
             Capacity: {occupiedParkingSpots} / {totalParkingSpots}
           </p>
@@ -39,7 +37,7 @@ export default function Facilities() {
   // render parking grid, with each parking spot as a button, red if occupied, green if available
   // parking is in the format of a [{id: 1, occupied: true}, {id: 2, occupied: false}]
   function renderParkingGrid() {
-    const parkingSpots = facilityData.parking;
+    const parkingSpots = currentFacility.parking;
     // render parking spots in rows of 10
     const rows = [];
     for (let i = 0; i < parkingSpots.length; i += 10) {
@@ -70,7 +68,6 @@ export default function Facilities() {
 
   function parkingSpotClick(spot) {
     alert(JSON.stringify(spot, null, 2));
-    console.log(spot);
   }
 
   return (

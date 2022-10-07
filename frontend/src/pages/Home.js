@@ -5,26 +5,16 @@ import { useFacilities } from "../contexts/Facilities";
 import "../styles/Home.css";
 
 export default function Home() {
-  const { renderFacilityDropdown, selectedName } = useFacilities();
+  const { renderFacilityDropdown } = useFacilities();
   const [checkInVisible, setCheckInVisible] = useState(false);
 
   function handleCheckIn() {
-    if (!facilityCheck()) {
-      return;
-    }
     setCheckInVisible(true);
   }
 
   function handleCheckOut() {
-    facilityCheck();
-  }
-
-  function facilityCheck() {
-    if (selectedName == null) {
-      alert("Please select a facility");
-      return false;
-    }
-    return true;
+    // navigate to vehicles page
+    window.location.href = "/vehicles";
   }
 
   function renderButtons() {
@@ -43,10 +33,7 @@ export default function Home() {
   return (
     <div className="main-container">
       <h1>Park Da Car</h1>
-      <CheckIn
-        checkInVisible={checkInVisible}
-        setCheckInVisible={setCheckInVisible}
-      />
+      <CheckIn visible={checkInVisible} setVisible={setCheckInVisible} />
       {renderFacilityDropdown()}
       {renderButtons()}
     </div>

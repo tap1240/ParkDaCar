@@ -3,22 +3,21 @@ import useDebounce from "../../hooks/useDebounce";
 import "../../styles/CheckIn.css";
 import { useFacilities } from "../../contexts/Facilities";
 
-export default function CheckIn({ checkInVisible, setCheckInVisible }) {
-  const { facilityData, facilities, setFacilities } = useFacilities();
+export default function CheckIn({ visible, setVisible }) {
+  const { currentFacility, facilities, setFacilities } = useFacilities();
 
   const [vin, setVin] = useState(null);
   const [vehicleInfo, setVehicleInfo] = useState(null);
 
   useDebounce(
-    () => {
-      fetch(`http://localhost:8080/vehicle/${vin}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log({ data });
-          setVehicleInfo(data);
-        });
+    async () => {
+      if (vin) {
+        const res = await fetch(`http://localhost:8080/vehicle/${vin}`);
+        const data = await res.json();
+        setVehicleInfo(data);
+      }
     },
-    1000,
+    500,
     [vin]
   );
 
@@ -51,68 +50,50 @@ export default function CheckIn({ checkInVisible, setCheckInVisible }) {
     // create owner object
     const ownerInfo = { owner, address, phone };
 
-    // get first empty spot in facilityData.parking
-    let parkingSpot = null;
-    for (const index in facilityData.parking) {
-      if (facilityData.parking[index].occupied === false) {
-        facilityData.parking[index].occupied = true;
-        facilityData.parking[index].vehicle = vehicleInfo;
-        facilityData.parking[index].owner = ownerInfo;
-        facilityData.parking[index].time = time;
-        facilityData.parking[index].attendant = attendant;
+    // get first empty spot in currentFacility.parking
+    for (const index in currentFacility.parking) {
+      if (currentFacility.parking[index].occupied === false) {
+        currentFacility.parking[index].occupied = true;
+        currentFacility.parking[index].vehicle = vehicleInfo;
+        currentFacility.parking[index].owner = ownerInfo;
+        currentFacility.parking[index].time = time;
+        currentFacility.parking[index].attendant = attendant;
 
-        parkingSpot = facilityData.parking[index].id;
+        // update currentFacility with new data
+        const newCurrentFacility = { ...currentFacility };
 
-        // update facilityData with new data
-        const newFacilityData = { ...facilityData };
-
-        // update facilities where name === facilityData.name
+        // update facilities where name === currentFacility.name
         const newFacilities = facilities.map((facility) => {
-          if (facility.name === facilityData.name) {
-            return newFacilityData;
+          if (facility.name === currentFacility.name) {
+            return newCurrentFacility;
           }
           return facility;
         });
 
-        // update facilities in context (this will update the selected facility)
+        // update facilities in context (this will update the selected facility also)
         setFacilities(newFacilities);
 
         // update facility in database
-        fetch(`http://localhost:8080/facility/${facilityData.name}`, {
+        fetch(`http://localhost:8080/facility/${currentFacility.name}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(newFacilityData),
+          body: JSON.stringify(newCurrentFacility),
         });
 
         break;
       }
     }
 
-    // do I use these to create a check-in object? or nah?
-
-    const facilityInfo = {
-      facility: facilityData.name,
-      parkingSpot: parkingSpot,
-    };
-
-    const checkInInfo = {
-      attendant,
-      time,
-      ownerInfo,
-      vehicleInfo,
-      facilityInfo,
-    };
-
-    console.log({ checkInInfo });
     // close modal
-    setCheckInVisible(false);
+    setVisible(false);
+    alert("Check In successful!");
   }
 
   function handleCancel() {
     setVehicleInfo(null);
-    setCheckInVisible(false);
+    setVisible(false);
   }
 
   // render input fields for VIN, attendant, and check in time
@@ -169,6 +150,16 @@ export default function CheckIn({ checkInVisible, setCheckInVisible }) {
     if (vehicleInfo == null) {
       return null;
     }
+
+    if (vehicleInfo.message) {
+      return (
+        <div className="vehicle-info">
+          <h5>Invalid VIN Probable</h5>
+          <p>{vehicleInfo.message}</p>
+        </div>
+      );
+    }
+
     return (
       <div className="vehicle-info-container">
         <h5>Vehicle Info</h5>
@@ -203,7 +194,7 @@ export default function CheckIn({ checkInVisible, setCheckInVisible }) {
     );
   }
 
-  switch (checkInVisible) {
+  switch (visible) {
     case true:
       return renderModal();
     case false:

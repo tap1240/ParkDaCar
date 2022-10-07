@@ -12,10 +12,10 @@ export default function SideNav() {
       name: "Facilities",
       path: "/facilities",
     },
-    // {
-    //   name: "Users",
-    //   path: "/users",
-    // },
+    {
+      name: "Valeted\nVehicles",
+      path: "/vehicles",
+    },
   ];
 
   function renderNavItems() {

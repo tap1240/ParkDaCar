@@ -6,8 +6,12 @@ exports.getHome = (req, res) => {
 
 exports.getVehicle = async (req, res) => {
   const vin = req.params.vin;
-  const vehicle = await Vehicle.getVehicleByVin(vin);
-  res.send(vehicle);
+  try {
+    const vehicle = await Vehicle.getVehicleByVin(vin);
+    res.send(vehicle);
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
 };
 
 exports.addVehicle = async (req, res) => {
