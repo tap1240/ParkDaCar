@@ -11,10 +11,27 @@ export default function Facilities() {
     if (!facilityData) {
       return null;
     }
+
+    // calculate total number of parking spots
+    let totalParkingSpots = 0;
+    let occupiedParkingSpots = 0;
+    facilityData.parking.forEach((spot) => {
+      console.log(spot);
+      totalParkingSpots += 1;
+      if (spot.occupied) {
+        occupiedParkingSpots += 1;
+      }
+    });
+
     return (
       <div className="facility-details">
-        <p>Address: {facilityData.address}</p>
-        {renderParkingGrid()}
+        <div className="facility-info1">
+          <p>Address: {facilityData.address}</p>
+          <p>
+            Capacity: {occupiedParkingSpots} / {totalParkingSpots}
+          </p>
+        </div>
+        <div className="facility-info2">{renderParkingGrid()}</div>
       </div>
     );
   }
