@@ -3,7 +3,6 @@ const History = require("../models/history");
 exports.getAll = async (req, res) => {
   try {
     const result = await History.getAll();
-    console.log(result);
     res.send(result);
   } catch (error) {
     res.status(400).send({ message: error.message });
