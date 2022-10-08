@@ -5,7 +5,7 @@ import { useFacilities } from "../../contexts/Facilities";
 export default function CheckOut({ visible, setVisible, vehicle }) {
   const { facilities, setFacilities, currentFacility } = useFacilities();
 
-  function handleCheckOut() {
+  async function handleCheckOut() {
     // get all fields from form
     const attendant = document.getElementById("attendant").value;
     let time = document.getElementById("check-out-time").value;
@@ -62,10 +62,40 @@ export default function CheckOut({ visible, setVisible, vehicle }) {
     }
 
     // --- Create Check Out in DB ---
+    const checkOut = {
+      vin: vehicle.vehicleInfo.vin,
+      year: vehicle.vehicleInfo.year,
+      make: vehicle.vehicleInfo.make,
+      model: vehicle.vehicleInfo.model,
+      trim: vehicle.vehicleInfo.trim,
+      facilityName: vehicle.facilityInfo.name,
+      facilityAddress: vehicle.facilityInfo.address,
+      parkingSpot: vehicle.facilityInfo.parkingSpot,
+      ownerName: vehicle.ownerInfo.owner,
+      ownerAddress: vehicle.ownerInfo.address,
+      ownerPhone: vehicle.ownerInfo.phone,
+      checkInTime: vehicle.checkInTime,
+      checkOutTime: time,
+      checkInAttendant: vehicle.attendant,
+      checkOutAttendant: attendant,
+    };
+
+    // create check out history in database
+    try {
+      await fetch("http://localhost:8080/history", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(checkOut),
+      });
+      alert("Check Out Successful");
+    } catch (error) {
+      alert(error.message);
+    }
 
     // close modal
     setVisible(false);
-    alert("Check Out successful!");
   }
 
   function handleCancel() {

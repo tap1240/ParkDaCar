@@ -32,6 +32,8 @@ exports.addHistory = async (req, res) => {
     ownerPhone: req.body.ownerPhone,
     checkInTime: req.body.checkInTime,
     checkOutTime: req.body.checkOutTime,
+    checkInAttendant: req.body.checkInAttendant,
+    checkOutAttendant: req.body.checkOutAttendant,
   };
 
   try {

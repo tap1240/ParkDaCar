@@ -4,10 +4,25 @@ import "../styles/Facilities.css";
 import { useFacilities } from "../contexts/Facilities";
 
 export default function Facilities() {
-  const { currentFacility, renderFacilityDropdown } = useFacilities();
+  const {
+    facilities,
+    currentFacility,
+    renderFacilityDropdown,
+    addTestFacility,
+  } = useFacilities();
 
   //   render facility details
   function renderFacilityDetails() {
+    if (facilities.length === 0) {
+      return (
+        <div>
+          <p>Please add a facility, click this button to add one!</p>
+          <p>~ Test Facility at 123 Main St with 5 parking spots ~</p>
+          <button onClick={addTestFacility}>Add Facility</button>
+        </div>
+      );
+    }
+
     if (!currentFacility) {
       return null;
     }

@@ -51,8 +51,10 @@ export default function CheckIn({ visible, setVisible }) {
     const ownerInfo = { owner, address, phone };
 
     // get first empty spot in currentFacility.parking
+    let res = false;
     for (const index in currentFacility.parking) {
       if (currentFacility.parking[index].occupied === false) {
+        res = true;
         currentFacility.parking[index].occupied = true;
         currentFacility.parking[index].vehicle = vehicleInfo;
         currentFacility.parking[index].owner = ownerInfo;
@@ -88,7 +90,12 @@ export default function CheckIn({ visible, setVisible }) {
 
     // close modal
     setVisible(false);
-    alert("Check In successful!");
+
+    if (res) {
+      alert("Check In successful!");
+    } else {
+      alert("No parking spots available");
+    }
   }
 
   function handleCancel() {

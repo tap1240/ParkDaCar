@@ -17,6 +17,9 @@ export function FacilitiesProvider({ children }) {
     async function fetchFacilities() {
       const res = await fetch("http://localhost:8080/facility");
       const data = await res.json();
+      if (data.length === 0) {
+        return;
+      }
       //sort data by name
       data.sort((a, b) => (a.name > b.name ? 1 : -1));
       setFacilities(data);
@@ -63,7 +66,14 @@ export function FacilitiesProvider({ children }) {
             };
             const ownerInfo = spot.owner;
             const checkInTime = spot.time;
-            const res = { id: index, vehicleInfo, facilityInfo, ownerInfo, checkInTime };
+            const res = {
+              id: index,
+              vehicleInfo,
+              facilityInfo,
+              ownerInfo,
+              checkInTime,
+              attendant: spot.attendant,
+            };
             vehicles.push(res);
           }
         });
@@ -107,15 +117,32 @@ export function FacilitiesProvider({ children }) {
     setSelectedName(e.target.value);
   }
 
+  function addTestFacility() {
+    const facility = {
+      name: "Test Facility",
+      address: "123 Main St.",
+      parking: 5,
+    };
+    fetch("http://localhost:8080/facility", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(facility),
+    });
+    alert("Please refresh the page to see the new facility");
+  }
+
   const value = {
     facilities,
     selectedName,
-    currentFacility: currentFacility,
+    currentFacility,
     vehicles,
-    setcurrentFacility: setCurrentFacility,
+    setCurrentFacility,
     setFacilities,
     renderFacilityDropdown,
     setVehicles,
+    addTestFacility,
   };
 
   return (

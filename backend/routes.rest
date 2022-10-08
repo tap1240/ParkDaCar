@@ -59,19 +59,21 @@ POST http://localhost:8080/history/
 Content-Type: application/json
 
 {
-    "vin": "BOOM.vin",
-    "year": "BOOM.year",
-    "make": "BOOM.make",
-    "model": "BOOM.model",
-    "trim": "BOOM.trim",
-    "facilityName": "BOOM.facilityName",
-    "facilityAddress": "BOOM.facilityAddress",
-    "parkingSpot": "BOOM.parkingSpot",
-    "ownerName": "BOOM.ownerName",
-    "ownerAddress": "BOOM.ownerAddress",
-    "ownerPhone": "BOOM.ownerPhone",
-    "checkInTime": "BOOM.checkInTime",
-    "checkOutTime": "BOOM.checkOutTime"
+  "vin": "JTNBB46K273000542",
+  "year": "2007",
+  "make": "TOYOTA",
+  "model": "Camry",
+  "trim": "",
+  "facilityName": "Test Facility",
+  "facilityAddress": "123 Main St.",
+  "parkingSpot": 1,
+  "ownerName": "own",
+  "ownerAddress": "add",
+  "ownerPhone": "123",
+  "checkInTime": "2022-10-08 01:17:39",
+  "checkOutTime": "2022-10-08 01:17:52",
+  "checkInAttendant": "att",
+  "checkOutAttendant": "sig"
 }
 
 ###

@@ -57,6 +57,7 @@ export default function Vehicles() {
             <p>Owner: {vehicle.ownerInfo.owner}</p>
             <p>Address: {vehicle.ownerInfo.address}</p>
             <p>Phone: {vehicle.ownerInfo.phone}</p>
+            <p>Attendant: {vehicle.attendant}</p>
           </div>
           <div className="vehicle-info">
             <p>Facility: {vehicle.facilityInfo.name}</p>

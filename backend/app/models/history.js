@@ -4,56 +4,64 @@ const mongoose = require("mongoose");
 const historySchema = new mongoose.Schema({
   vin: {
     type: String,
-    required: true,
+    // required: true,
   },
   year: {
     type: String,
-    required: true,
+    // required: true,
   },
   make: {
     type: String,
-    required: true,
+    // required: true,
   },
 
   model: {
     type: String,
-    required: true,
+    // required: true,
   },
   trim: {
     type: String,
-    required: true,
+    // required: true,
   },
   facilityName: {
     type: String,
-    required: true,
+    // required: true,
   },
   facilityAddress: {
     type: String,
-    required: true,
+    // required: true,
   },
   parkingSpot: {
     type: String,
-    required: true,
+    // required: true,
   },
   ownerName: {
     type: String,
-    required: true,
+    // required: true,
   },
   ownerAddress: {
     type: String,
-    required: true,
+    // required: true,
   },
   ownerPhone: {
     type: String,
-    required: true,
+    // required: true,
   },
   checkInTime: {
     type: String,
-    required: true,
+    // required: true,
   },
   checkOutTime: {
     type: String,
-    required: true,
+    // required: true,
+  },
+  checkInAttendant: {
+    type: String,
+    // required: true,
+  },
+  checkOutAttendant: {
+    type: String,
+    // required: true,
   },
 });
 
